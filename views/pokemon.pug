@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        title Pokemon
+        script(type='text/javascript' src="javascripts/page-flip.js")
+        link(rel='stylesheet' href='stylesheets/pokeStyle.css')
+    body 
+        .container
+            #binder.flip-book
+            .page.page-cover.page-cover-top(data-density='hard')
+                .page-content
+                    .page-image(style='background-image: url(images/pages/0.jpg)')
+
+            - for (var i = 1; i <= 34; ++i) 
+                .page(data-density='hard')
+                    .page-content
+                        .page-image(style='background-image: url(images/pages/'+i+'.jpg)')
+
+            .page.page-cover.page-cover-bottom(data-density='hard')
+                .page-content
+                    .page-image(style='background-image: url(images/pages/35.jpg)')
