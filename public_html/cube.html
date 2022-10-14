@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Rubik's Cube</title>
+    <!-- Begin GLSL 3.0 Shader code-->
+    <script id="vertex-shader" type="x-shader/x-vertex">
+      #version 300 es
+      in vec4 a_coords;
+      in vec4 a_color;
+      out vec4 v_color;
+      uniform mat4 modelViewMatrix;
+      uniform mat4 projectionMatrix;
+      uniform int outline_mode;
+      void main() {
+      if (outline_mode == 1) {
+      v_color = vec4(0.0,0.0,0.0,1.0);
+      }
+      else {
+      v_color = a_color;
+      }
+      gl_Position = projectionMatrix * modelViewMatrix * a_coords;
+      }
+    </script>
+    <script id="fragment-shader" type="x-shader/x-fragment">
+      #version 300 es
+      precision mediump float;
+      in vec4 v_color;
+      out vec4 f_color;
+      void main() {
+      f_color = v_color;
+      }
+    </script>
+    <!-- End GLSL 3.0 Shader code-->
+    <!-- JS include files-->
+    <script type="text/javascript" src="javascripts/utils.js"></script>
+    <script type="text/javascript" src="javascripts/rubik-helper.js"></script>
+    <script type="text/javascript" src="javascripts/cube.js"></script>
+  </head>
+  <body onload="init();">
+    <h2>Rubik's Cube</h2>
+    <!-- The style for the canvas should make the other HTML elements appear to its right-->
+    <canvas id="gl-canvas" style="float:left; margin-right: 5px;" width="850" height="850">Oops ... your browser doesn't support the HTML5 canvas element</canvas>
+    <p>
+      <button id="xButton">Rotate X</button>
+      <button id="yButton">Rotate Y</button>
+      <button id="zButton">Rotate Z</button>
+      <button id="ResetButton">Reset</button>
+    </p>
+    <p>
+      <button id="RButton">R rotation</button>
+      <button id="rButton">r rotation</button>
+    </p>
+    <p>
+      <button id="LButton">L rotation</button>
+      <button id="lButton">l rotation</button>
+    </p>
+    <p>
+      <button id="UButton">U rotation</button>
+      <button id="uButton">u rotation</button>
+    </p>
+    <p>
+      <button id="DButton">D rotation</button>
+      <button id="dButton">d rotation</button>
+    </p>
+    <p>
+      <button id="FButton">F rotation</button>
+      <button id="fButton">f rotation</button>
+    </p>
+    <p>
+      <button id="BButton">B rotation</button>
+      <button id="bButton">b rotation</button>
+    </p>
+    <p>
+      <button id="RandomButton">Random rotation</button>
+      <button id="ScrambleButton">Scramble cube</button>
+    </p>
+  </body>
+</html>
