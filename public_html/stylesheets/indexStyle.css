@@ -12,8 +12,13 @@ body {
     align-items: center;
     align-items: center;
     margin: 0 auto;
-    width: 70%;
+
     font-family: 'Space Mono', monospace;
+}
+
+canvas {
+    height: 100%;
+    width: 100%;
 }
 
 .overCanvas {
@@ -21,24 +26,27 @@ body {
     position: absolute;
 }
 
+.index {
+    display: flex;
+}
+  
+.column {
+    width: 400px;
+    flex: 50%;
+}
+
 h1 {
     font-size: 80px;
     color: white;
 }
 
-p {
-    font-size: 18px;
-    color: white;
-}
-
 h2 {
-    margin: 15px;
     font-size: 40px;
     color: white;
 }
 
-h3 {
-    font-size: 20px;
+p {
+    font-size: 18px;
     color: white;
 }
 
@@ -53,11 +61,4 @@ button {
     border-radius: 16px;
 }
 
-.index {
-    display: flex;
-}
-  
-.column {
-    width: 400px;
-    flex: 50%;
-}
+

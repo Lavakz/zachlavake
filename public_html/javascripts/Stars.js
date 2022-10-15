@@ -16,6 +16,7 @@ const SPEED = 0.01;
 const R_SPEED = 4;
 const MIN_SIZE = 0.1;
 const MAX_SIZE = 0.3;
+const INIT_STAR_NUM = 4;
 
 let perClick = 1;
 let pause = false;
@@ -63,22 +64,21 @@ function init() {
         } 
     });
 
+    // set up screen
+    gl.clearColor(0,0,0,1); 
+    gl.viewport(0, 0, window.innerWidth, window.innerHeight);
+    window.addEventListener('resize', () => {
+        gl.viewport(0, 0, window.innerWidth, window.innerHeight); 
+    });
+
     // set up buffer
     bufferCoords = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, bufferCoords);
     gl.vertexAttribPointer(attributeCoords, 2, gl.FLOAT, false, 0, 0); 
     gl.enableVertexAttribArray(attributeCoords); 
 
-    // set up screen
-    gl.viewport(0, 0, window.innerWidth, window.innerHeight); 
-    gl.clearColor(0,0,0,1); 
-
-    gl.canvas.width  = window.innerWidth;
-    gl.canvas.height = window.innerHeight;
-
     // starting stars
-    for (let t = 0; t < 4; t++)
-        newStar(0, 0);
+    for (let i = 0; i < INIT_STAR_NUM; i++) newStar(0, 0);
 
     draw();
 }
@@ -100,6 +100,9 @@ function newStar(x, y) {
 
 // Draws the contents of the canvas
  function draw() {  
+    gl.canvas.width  = window.innerWidth;
+    gl.canvas.height = window.innerHeight;
+
     for (let i = 0; i < stars.length; i++){
         gl.bufferData(gl.ARRAY_BUFFER, flatten(stars[i].coords), gl.STREAM_DRAW);
         gl.uniformMatrix4fv(uniformModelTransform,false,flatten(stars[i].modelTransform));
