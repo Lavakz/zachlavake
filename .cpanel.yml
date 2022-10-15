@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/zachlava/public_html/
+    - /bin/cp -R html $DEPLOYPATH
+    - /bin/cp -R stylesheets $DEPLOYPATH
+    - /bin/cp -R javascripts $DEPLOYPATH
