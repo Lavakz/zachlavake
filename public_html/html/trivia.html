@@ -1,0 +1,137 @@
+
+<html>
+  <head>
+    <script>
+      let i = 0;
+      let correctCount = 0;
+      let firstGuess = true;
+      
+      window.onload = function(){
+          getCategories();
+      } 
+      
+      function start() {
+          i = 0;
+          correctCount = 0;
+          quiz = getQuiz(document.getElementById("lengthSelect").value, 
+                         document.getElementById("categorySelect").value);
+          loadQuestion(0);
+          document.getElementById("setup").style.display = "none";
+          document.getElementById("game").style.display = "block"
+      }
+      
+      function results() {
+          document.getElementById('score').innerHTML = 'Final score is '+correctCount+' out of '+quiz.length;
+          document.getElementById("game").style.display = "none";
+          document.getElementById("setup").style.display = "block";
+      }
+      
+      function next() {
+          if (i < quiz.length-1){
+              i++;
+              loadQuestion(i);
+          } else results()
+      }
+      
+      function getCategories() {
+          var Httpreq = new XMLHttpRequest();
+          Httpreq.open("GET",'https://opentdb.com/api_category.php',false);
+          Httpreq.send(null);
+          let categories = JSON.parse(Httpreq.responseText).trivia_categories;
+      
+          var categorySelect = document.getElementById("categorySelect");
+          categories.forEach(function(category) {
+              var el = document.createElement("option");
+              el.textContent = category.name;
+              el.value = category.id;
+              categorySelect.appendChild(el);
+          })
+      }
+      
+      function getQuiz(length, category) {
+          var Httpreq = new XMLHttpRequest();
+          Httpreq.open("GET",'https://opentdb.com/api.php?amount='+length+
+                                                      '&category='+category,false);
+          Httpreq.send(null);
+          let json_obj = JSON.parse(Httpreq.responseText); 
+      
+          quiz = [];
+          for (let i = 0; i < length; i++){
+              quiz.push({
+                      question: json_obj.results[i].question,
+                      category: json_obj.results[i].category,
+                      incorrect: json_obj.results[i].incorrect_answers,
+                      correct: json_obj.results[i].correct_answer
+              });
+          }
+          return quiz;
+      }
+      
+      function loadQuestion() {
+          document.getElementById('description').innerHTML = correctCount + '/' + quiz.length + ' ' + quiz[i].category;
+          document.getElementById('question').innerHTML = 'Q'+(i+1) + ': ' + quiz[i].question;
+      
+          // remove old answers
+          var answersBox = document.getElementById("answersBox");
+          answersBox.innerHTML = ''
+      
+          // create answers array
+          let answers = [];
+          let count = 0;
+          answerAmount = quiz[i].incorrect.length+1;
+          correctPos = Math.floor(Math.random() * answerAmount)
+          for (let pos = 0; pos < answerAmount; pos++) 
+              if (pos == correctPos)
+                  answers[correctPos] = quiz[i].correct;
+              else answers[pos] = quiz[i].incorrect.pop();
+      
+          // Create answer buttons
+          for (let pos = 0; pos < answers.length; pos++){
+              var el = document.createElement("button");
+              el.id = 'a' + pos;
+              el.textContent = answers[pos];
+              el.style.width = '300px';
+              el.style.margin = '20px';
+              el.style.background='#D3D3D3';
+              el.style.fontSize='20px';
+              if (pos == correctPos)
+                  el.onclick = function(){correct(pos);};
+              else el.onclick = function(){incorrect(pos);};
+              
+              answersBox.appendChild(el);
+          }
+          firstGuess = true;
+      }
+      
+      function correct(pos) {
+          if (firstGuess)
+              correctCount++;
+          document.getElementById('a' + pos).style.background='#B6DC3D';
+      }
+      
+      function incorrect(pos) {
+          firstGuess = false;
+          document.getElementById('a' + pos).style.background='#FF0000';
+      }
+    </script>
+  </head>
+  <body> 
+    <h1>Trivia </h1>
+    <div id="setup">
+      <h3 id="score"></h3>
+      <p>Category: 
+        <select id="categorySelect"></select>
+      </p>
+      <p>Length:   
+        <input type="number" min="1" max="50" style="width:50px;" id="lengthSelect"/>
+      </p>
+      <button onclick="start()" id="start">Start</button>
+    </div>
+    <div style="display:none;" id="game">
+      <h3 id="description"></h3>
+      <h2 id="question"> </h2>
+      <div style="background:blue;width:680px;" id="answersBox"></div><br/><br/>
+      <button style="width:680px;fontSize:20px;" onclick="next()">Next</button>
+    </div>
+  </body>
+</html>
