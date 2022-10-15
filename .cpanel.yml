@@ -3,6 +3,10 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/zachlava/public_html/
     - /bin/cp -R /home/zachlava/repositories/zachlavake/public_html/index.html $DEPLOYPATH
-    - /bin/cp -R /home/zachlava/repositories/zachlavake/public_html/html $DEPLOYPATH
+    - /bin/cp -R /home/zachlava/repositories/zachlavake/public_html/pokemon.html $DEPLOYPATH
+    - /bin/cp -R /home/zachlava/repositories/zachlavake/public_html/music.html $DEPLOYPATH
+    - /bin/cp -R /home/zachlava/repositories/zachlavake/public_html/trivia.html $DEPLOYPATH
+    - /bin/cp -R /home/zachlava/repositories/zachlavake/public_html/SpaceRace.html $DEPLOYPATH
+    - /bin/cp -R /home/zachlava/repositories/zachlavake/public_html/visualizer.html $DEPLOYPATH
     - /bin/cp -R /home/zachlava/repositories/zachlavake/public_html/stylesheets $DEPLOYPATH
     - /bin/cp -R /home/zachlava/repositories/zachlavake/public_html/javascripts $DEPLOYPATH
