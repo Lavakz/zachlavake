@@ -2,6 +2,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/zachlava/public_html/
-    - /bin/cp -R html $DEPLOYPATH
-    - /bin/cp -R stylesheets $DEPLOYPATH
-    - /bin/cp -R javascripts $DEPLOYPATH
+    - repositories/zachlavake/public_html/html -R html $DEPLOYPATH
+    - repositories/zachlavake/public_html/stylesheets -R stylesheets $DEPLOYPATH
+    - repositories/zachlavake/public_html/javascripts -R javascripts $DEPLOYPATH
