@@ -17,16 +17,17 @@
                          document.getElementById("categorySelect").value);
           loadQuestion(0);
           document.getElementById("setup").style.display = "none";
-          document.getElementById("game").style.display = "block"
+          document.getElementById("quiz").style.display = "block"
       }
       
       function results() {
           document.getElementById('score').innerHTML = 'Final score is '+correctCount+' out of '+quiz.length;
-          document.getElementById("game").style.display = "none";
+          document.getElementById("quiz").style.display = "none";
           document.getElementById("setup").style.display = "block";
       }
       
       function next() {
+          document.getElementById('next').style.background='white';
           if (i < quiz.length-1){
               i++;
               loadQuestion(i);
@@ -88,12 +89,9 @@
           // Create answer buttons
           for (let pos = 0; pos < answers.length; pos++){
               var el = document.createElement("button");
+              el.class = "answer";
               el.id = 'a' + pos;
               el.textContent = answers[pos];
-              el.style.width = '300px';
-              el.style.margin = '20px';
-              el.style.background='#D3D3D3';
-              el.style.fontSize='20px';
               if (pos == correctPos)
                   el.onclick = function(){correct(pos);};
               else el.onclick = function(){incorrect(pos);};
@@ -104,34 +102,82 @@
       }
       
       function correct(pos) {
-          if (firstGuess)
+          if (firstGuess){
+              document.getElementById('next').style.background='lightgreen'
               correctCount++;
-          document.getElementById('a' + pos).style.background='#B6DC3D';
+          }
+          document.getElementById('a' + pos).style.background='lightgreen';
+          firstGuess = false;
       }
       
       function incorrect(pos) {
+          if (firstGuess)
+              document.getElementById('next').style.background='red'
+          document.getElementById('a' + pos).style.background='red';
           firstGuess = false;
-          document.getElementById('a' + pos).style.background='#FF0000';
       }
     </script>
+    <style>
+      #game, body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+      #game {width: 70%;}
+      #setup, #quiz {
+          display: flex;
+          flex-direction: column;
+          align-items: left;
+      }
+      #title {font-size: 80px; margin: 30px;}
+      #lengthSelect {width:50;}
+      #start, #next {
+          width:100; height:50; 
+          margin: 30px;
+          font-size: 20px;
+      }
+      button {
+          background-color: white;
+          filter: drop-shadow(5px 5px 1px rgba(0, 0, 0, 0.25));
+      }
+      #start {background-color: lightgreen;}
+      .belowBox {display: flex; justify-content: center;}
+      #question {flex-wrap: wrap}
+      #answersBox{
+          background-color: blue;
+          display: flex;
+          flex-wrap: wrap;
+      }
+      #answersBox>button{
+          width: 40%; height: 70;
+          margin: 5%;
+          font-size: 16px;
+      }
+    </style>
   </head>
   <body> 
-    <h1>Trivia </h1>
-    <div id="setup">
-      <h3 id="score"></h3>
-      <p>Category: 
-        <select id="categorySelect"></select>
-      </p>
-      <p>Length:   
-        <input type="number" min="1" max="50" style="width:50px;" id="lengthSelect"/>
-      </p>
-      <button onclick="start()" id="start">Start</button>
-    </div>
-    <div style="display:none;" id="game">
-      <h3 id="description"></h3>
-      <h2 id="question"> </h2>
-      <div style="background:blue;width:680px;" id="answersBox"></div><br/><br/>
-      <button style="width:680px;fontSize:20px;" onclick="next()">Next</button>
+    <div id="game">
+      <h1 id="title">Trivia </h1>
+      <div id="setup">
+        <h3 id="score"></h3>
+        <p>Category: 
+          <select id="categorySelect"></select>
+        </p>
+        <p>Length of quiz:   
+          <input type="number" min="1" max="50" id="lengthSelect"/>
+        </p>
+        <div class="belowBox">
+          <button onclick="start()" id="start">Start</button>
+        </div>
+      </div>
+      <div id="quiz" style="display:none;">
+        <h3 id="description"></h3>
+        <h2 id="question"> </h2>
+        <div id="answersBox"></div>
+        <div class="belowBox">
+          <button onclick="next()" id="next">Next</button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
