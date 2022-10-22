@@ -23,6 +23,13 @@ html
                 document.getElementById('score').innerHTML = 'Final score is '+correctCount+' out of '+quiz.length;
                 document.getElementById("quiz").style.display = "none";
                 document.getElementById("setup").style.display = "block";
+                const result = {
+                    correct: correctCount,
+                    quizLength: quiz.length,
+                    category: quiz[0].category
+                }
+                var json = JSON.stringify(result);
+                //fs.appendFile('triviaResults.json', json, function(err){});
             }
 
             function next() {
