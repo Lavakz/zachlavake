@@ -125,7 +125,12 @@
       }
     </script>
     <style>
-      #game, body {
+      body {
+          display: flex;
+          justify-content: center;
+         
+      }
+      #game {
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -160,9 +165,20 @@
           margin: 5%;
           font-size: 16px;
       }
+      #start {
+          font-size: 16px;
+          background-color:lightgreen;
+      }
+      #back {
+          position: absolute;
+          left: 10px;
+          padding: 10px;
+          background-color:lightgreen;
+      }
     </style>
   </head>
   <body> 
+    <button id="back" onclick="location.href='/index.html'">Back</button>
     <div id="game">
       <h1 id="title">Trivia </h1>
       <div id="setup">

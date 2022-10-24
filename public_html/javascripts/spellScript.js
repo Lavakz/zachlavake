@@ -3,8 +3,8 @@
 const puzzle1 = {
   center: 'O',
   letters: ["W", "H", "M", "T", "A", "K"],
-  solutions: ["mohawk", "amok", "atom", "moat", "moth", "oath", "whoa", "whom", "hot", "how",
-    "mow", "oak", "oat", "ohm", "who", "tow", "two", "wow", "wok", "ow", "oh", "ok"]
+  solutions: ["tomahawk", "mohawk", "amok", "atom", "moat", "moth", "oath", "whoa", "whom", "hot", "how",
+              "mow", "oak", "oat", "ohm", "who", "tow", "two", "wow", "wok", "ow", "oh", "ok"]
 };
 
 let currentPuzzle = puzzle1;

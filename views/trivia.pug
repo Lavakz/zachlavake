@@ -124,7 +124,12 @@ html
             }
         //-------------------------------------------------------------------------------------
         style.
-            #game, body {
+            body {
+                display: flex;
+                justify-content: center;
+               
+            }
+            #game {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -159,8 +164,19 @@ html
                 margin: 5%;
                 font-size: 16px;
             }
+            #start {
+                font-size: 16px;
+                background-color:lightgreen;
+            }
+            #back {
+                position: absolute;
+                left: 10px;
+                padding: 10px;
+                background-color:lightgreen;
+            }
     //------------------------------------------------------------------------------------------
     body 
+        button#back(onclick= "location.href='/index.html'" ) Back
         #game
             h1#title Trivia 
             #setup
