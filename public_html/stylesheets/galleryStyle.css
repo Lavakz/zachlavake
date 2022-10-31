@@ -1,0 +1,224 @@
+/* -------------------- Page Setup ------------------- */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: gray;
+}
+
+.remove-list-defaults {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#wrapper {
+  background-color: white;
+  /* to give the page some "depth", add shadow: */
+  box-shadow: 0 0 20px black;
+  
+  margin: 0 auto;
+  max-width: 1000px;
+  min-height: 100vh;  
+
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: black;
+  color: aqua;
+  box-shadow: 0 0 20px black;
+
+  font-family: sans-serif;
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  margin: 30px 0;
+  flex: 1; /* lonely child in the header */
+}
+
+/* Styling the hamburger menu button */
+#menu-button {
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#menu-button:hover {
+  background-color: rgb(75, 75, 75);
+}
+
+/* ----------------- Styling Nav Links -----------------*/
+nav ul {
+  display: flex;
+}
+
+nav a {
+  background-color: black;
+  color: aqua;
+  
+  text-decoration: none;
+  font-weight: bold;
+
+  display: block;
+  padding: 10px;
+}
+
+nav a:hover {
+  background-color: aqua;
+  color: black;
+}
+
+.hide {
+    display: none;
+    background-color: red;
+}
+
+/* ------- Styling the main area and the gallery ------- */
+main {
+  flex: 1;
+
+  /* so the main element grows to contain
+     a hovered-over image: */
+  overflow: auto;
+}
+
+/* to hide the main element scrollbar when 
+   there's overflow from a hovered-over image: */
+main::-webkit-scrollbar { 
+  display: none; 
+  width: 0;
+}
+
+#gallery {
+  display: flex;
+  flex-direction: column;
+}
+
+/* to avoid extra space happening in list items: */
+#gallery li {
+  display: inline-flex;
+}
+
+.gallery-img {
+  /* allows the images to be responsive: */
+  width: 100%;
+}
+
+.large-img {
+  display: none;
+}
+
+/* -------- Styling Support Contact Info -------------- */
+#support-contact {
+  background-color: black;
+  text-align: center;
+}
+
+#support-contact a {
+  color: aqua;
+  text-decoration: none;
+}
+
+/***************************************************************/
+
+header {
+  position: sticky;
+  top: 0;
+}
+
+#menu {
+  position: absolute;
+  right: 15px;
+}
+
+.show {
+    display: block;
+}
+
+@media screen and (min-width: 500px) { 
+  #menu-button {
+    display: none;
+  }
+  .link-icon {
+    display: none;
+  }
+  nav {
+    width: 100%;
+  } 
+  #menu {
+    background-color: blue;
+    position: static;
+    display: flex;
+    justify-content: center;
+  }
+  #menu li {
+
+    width: 20%;
+  }
+  header {
+    display: flex;
+    flex-direction: column;
+  }
+  nav a {
+    background-color: aqua;
+    color: black;
+  }
+  nav a:hover { 
+    outline: 2px solid black;
+  }
+} 
+
+@media screen and (min-width: 650px) { 
+  .link-icon {
+    display: inline;
+  }
+  #gallery {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  #gallery li {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 850px) { 
+  #gallery {
+    flex-wrap: nowrap;
+    background-color: lightgray;
+  }
+  #gallery li {
+    width: 5%;
+  }
+  #gallery li:hover .large-img { /* select the large-img inside the li being hovered over */
+    display: block; 
+    position: fixed;
+    width: 50%;
+    left: 25%;
+    top: 189px;
+  }
+  #support-contact {
+    position: fixed;
+    width: 150px;
+    right: 0px;
+    bottom: 10%;
+
+    padding: 20px;
+    border-top-left-radius:15px;
+    border-bottom-left-radius:15px;
+  }
+}
+

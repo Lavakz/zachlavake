@@ -1,4 +1,5 @@
 {
     "compile-hero.disable-compile-files-on-did-save-code": false,
-    "compile-hero.pug-output-directory": "../public_html/"
+    "compile-hero.pug-output-directory": "../public_html/",
+    "liveServer.settings.port": 5501
 }

@@ -89,3 +89,21 @@ body {
 .page.page-cover.page-cover-bottom {
     box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5), 10px 0 8px 0px rgba(0, 0, 0, 0.4);
 }
+
+/* magnifier */
+* {
+    box-sizing: border-box;
+  }
+  
+  .img-magnifier-container {
+    position: relative;
+  }
+  
+  .img-magnifier-glass {
+    position: absolute;
+    border: 3px solid #000;
+    border-radius: 50%;
+    cursor: none;
+    width: 100px;
+    height: 100px;
+  }
